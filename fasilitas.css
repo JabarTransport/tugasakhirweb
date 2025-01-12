@@ -1,0 +1,104 @@
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@600&family=Poppins&display=swap');
+* {
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+    font-family: 'Poppins', sans-serif;
+}
+
+body {
+    background: linear-gradient(to bottom, #00c6ff, #0072ff);
+    color: #fff;
+    min-height: 100vh;
+    margin: 0;
+}
+
+header {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 20px 50px;
+    background: rgba(0, 0, 0, 0.7);
+    z-index: 99;
+}
+
+header h1 {
+    color: #fff;
+    font-size: 28px;
+}
+
+header nav a {
+    margin-left: 30px;
+    color: #fff;
+    font-size: 18px;
+    transition: all 0.3s ease;
+}
+
+header nav .active,
+header nav a:hover {
+    color: #ff495b;
+    font-weight: bold;
+}
+
+.intro {
+    text-align: center;
+    padding: 100px 20px 50px;
+    background: rgba(0, 0, 0, 0.8);
+    color: #fff;
+}
+
+.intro h2 {
+    font-size: 42px;
+    margin-bottom: 15px;
+}
+
+.intro p {
+    font-size: 18px;
+}
+
+.facility-section {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    padding: 50px;
+}
+
+.facility {
+    flex: 1;
+    max-width: 280px;
+    margin: 15px;
+    text-align: center;
+    border-radius: 10px;
+    overflow: hidden;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+    background: #fff;
+    color: #333;
+}
+
+.facility img {
+    width: 100%;
+    height: auto;
+    border-bottom: 1px solid #ddd;
+}
+
+.facility h3 {
+    font-size: 22px;
+    margin: 15px 0;
+}
+
+.facility p {
+    font-size: 16px;
+    color: #555;
+    padding: 0 10px 20px;
+}
+
+footer {
+    text-align: center;
+    padding: 20px;
+    background: rgba(0, 0, 0, 0.8);
+    color: #fff;
+}

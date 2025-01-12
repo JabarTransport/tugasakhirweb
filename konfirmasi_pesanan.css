@@ -1,0 +1,110 @@
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@600&family=Poppins&display=swap');
+* {
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+    font-family: 'Poppins', sans-serif;
+}
+
+body {
+    background: linear-gradient(to bottom, #6a11cb, #2575fc);
+    color: #fff;
+    min-height: 100vh;
+    margin: 0;
+}
+
+header {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 20px 50px;
+    background: rgba(0, 0, 0, 0.7);
+    z-index: 99;
+}
+
+header h1 {
+    color: #fff;
+    font-size: 28px;
+}
+
+header nav a {
+    margin-left: 30px;
+    color: #fff;
+    font-size: 18px;
+    transition: all 0.3s ease;
+}
+
+header nav .active,
+header nav a:hover {
+    color: #ff495b;
+    font-weight: bold;
+}
+
+.confirmation {
+    text-align: center;
+    padding: 100px 20px;
+    color: #fff;
+}
+
+.confirmation h2 {
+    font-size: 42px;
+    margin-bottom: 20px;
+}
+
+.confirmation p {
+    font-size: 18px;
+}
+
+.details {
+    background: rgba(255, 255, 255, 0.9);
+    color: #333;
+    border-radius: 10px;
+    padding: 20px;
+    max-width: 500px;
+    margin: 30px auto;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+    text-align: left;
+}
+
+.details p {
+    font-size: 16px;
+    margin-bottom: 10px;
+}
+
+button {
+    margin: 10px 10px;
+    padding: 10px 20px;
+    font-size: 18px;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background 0.3s ease;
+}
+
+button:first-child {
+    background: #28a745;
+}
+
+button:first-child:hover {
+    background: #218838;
+}
+
+button:last-child {
+    background: #dc3545;
+}
+
+button:last-child:hover {
+    background: #c82333;
+}
+
+footer {
+    text-align: center;
+    padding: 20px;
+    background: rgba(0, 0, 0, 0.8);
+    color: #fff;
+}

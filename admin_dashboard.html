@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard Admin</title>
+    <link rel="stylesheet" href="admin_dashboard.css">
+</head>
+
+<body>
+    <header>
+        <h1>Dashboard Admin</h1>
+        <nav>
+            <a href="home.html">Home</a>
+            <a href="kamar.html">Kamar</a>
+            <a href="fasilitas.html">Fasilitas</a>
+            <a href="home.html" onclick="logout()">Logout</a>
+        </nav>
+    </header>
+
+    <section class="admin-section">
+        <h2>Data Konfirmasi Pesanan</h2>
+        <table>
+            <thead>
+                <tr>
+                    <th>Nama</th>
+                    <th>Email</th>
+                    <th>Nomor Telepon</th>
+                    <th>Tipe Kamar</th>
+                    <th>Check-in</th>
+                    <th>Check-out</th>
+                    <th>Total Harga</th>
+                </tr>
+            </thead>
+            <tbody id="dataTable"></tbody>
+        </table>
+    </section>
+
+    <footer>
+        <p>&copy; 2025 Hotel Anda. Semua Hak Dilindungi.</p>
+    </footer>
+
+    <script>
+        function checkAdminAccess() {
+            const isAdminLoggedIn = localStorage.getItem("isAdminLoggedIn");
+            if (isAdminLoggedIn !== "true") {
+                alert("Akses ditolak! Hanya admin yang dapat mengakses halaman ini.");
+                window.location.href = "login.html";
+
+            }
+        }
+
+        function loadBookingData() {
+            const bookingData = JSON.parse(localStorage.getItem("bookingData"));
+
+            if (bookingData) {
+                const prices = {
+                    standard: 500000,
+                    deluxe: 800000,
+                    suite: 1200000
+                };
+
+                const days = calculateDays(bookingData.checkin, bookingData.checkout);
+                const totalPrice = days * prices[bookingData.tipe_kamar];
+
+                const tableRow = `
+                    <tr>
+                        <td>${bookingData.nama}</td>
+                        <td>${bookingData.email}</td>
+                        <td>${bookingData.telepon}</td>
+                        <td>${bookingData.tipe_kamar}</td>
+                        <td>${bookingData.checkin}</td>
+                        <td>${bookingData.checkout}</td>
+                        <td>Rp ${totalPrice.toLocaleString()}</td>
+                    </tr>
+                `;
+
+                document.getElementById("dataTable").innerHTML = tableRow;
+            } else {
+                document.getElementById("dataTable").innerHTML = "<tr><td colspan='7'>Tidak ada data pesanan.</td></tr>";
+            }
+        }
+
+        function calculateDays(checkin, checkout) {
+            const startDate = new Date(checkin);
+            const endDate = new Date(checkout);
+            const diffTime = endDate - startDate;
+            return Math.ceil(diffTime / (1000 * 60 * 60 * 24));
+        }
+
+        function logout() {
+            localStorage.removeItem("isAdminLoggedIn"); // Hapus status login admin
+            alert("Anda telah logout.");
+            window.location.href = "login.html";
+        }
+
+        // Periksa akses dan load data
+        checkAdminAccess();
+        loadBookingData();
+    </script>
+</body>
+
+</html>

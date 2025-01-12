@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Konfirmasi Pesanan</title>
+    <link rel="stylesheet" href="konfirmasi_pesanan.css">
+</head>
+
+<body>
+    <header>
+        <h1>Voltus</h1>
+        <nav>
+            <a href="home.html">Home</a>
+            <a href="kamar.html">Kamar</a>
+            <a href="fasilitas.html">Fasilitas</a>
+            <a href="pesan.html">Pesan Sekarang</a>
+            <a href="#" class="active">Login</a>
+        </nav>
+    </header>
+
+    <section class="confirmation">
+        <h2>Konfirmasi Pesanan Anda</h2>
+        <p>Berikut adalah detail pemesanan Anda:</p>
+
+        <div class="details">
+            <p><strong>Nama:</strong> <span id="nama"></span></p>
+            <p><strong>Email:</strong> <span id="email"></span></p>
+            <p><strong>Nomor Telepon:</strong> <span id="telepon"></span></p>
+            <p><strong>Tipe Kamar:</strong> <span id="tipe_kamar"></span></p>
+            <p><strong>Tanggal Check-in:</strong> <span id="checkin"></span></p>
+            <p><strong>Tanggal Check-out:</strong> <span id="checkout"></span></p>
+            <p><strong>Total Harga:</strong> <span id="harga"></span></p>
+            <p><strong>Fasilitas:</strong></p>
+            <ul id="fasilitas"></ul>
+        </div>
+
+        <button onclick="confirmOrder()">Konfirmasi</button>
+        <button onclick="editOrder()">Edit Pesanan</button>
+    </section>
+
+    <footer>
+        <p>&copy; 2025 Hotel Anda. Semua Hak Dilindungi.</p>
+    </footer>
+
+    <script>
+        const prices = {
+            standard: 500000,
+            deluxe: 800000,
+            suite: 1200000
+        };
+
+        const facilities = {
+            standard: ["Wifi Gratis", "TV", "Kamar Mandi"],
+            deluxe: ["Wifi Gratis", "TV", "Kamar Mandi", "Sarapan Pagi"],
+            suite: ["Wifi Gratis", "TV", "Kamar Mandi", "Sarapan Pagi", "Ruang Tamu"]
+        };
+
+        function loadBookingData() {
+            const bookingData = JSON.parse(localStorage.getItem("bookingData"));
+
+            if (bookingData) {
+                document.getElementById("nama").textContent = bookingData.nama;
+                document.getElementById("email").textContent = bookingData.email;
+                document.getElementById("telepon").textContent = bookingData.telepon;
+                document.getElementById("tipe_kamar").textContent = bookingData.tipe_kamar;
+                document.getElementById("checkin").textContent = bookingData.checkin;
+                document.getElementById("checkout").textContent = bookingData.checkout;
+
+                const days = calculateDays(bookingData.checkin, bookingData.checkout);
+                const totalPrice = days * prices[bookingData.tipe_kamar];
+                document.getElementById("harga").textContent = `Rp ${totalPrice.toLocaleString()}`;
+
+                const fasilitasList = document.getElementById("fasilitas");
+                fasilitasList.innerHTML = "";
+                facilities[bookingData.tipe_kamar].forEach(facility => {
+                    const li = document.createElement("li");
+                    li.textContent = facility;
+                    fasilitasList.appendChild(li);
+                });
+            } else {
+                alert("Data pemesanan tidak ditemukan!");
+                window.location.href = "pesan.html"; // Jika tidak ada data, kembali ke halaman pesanan
+            }
+        }
+
+        function calculateDays(checkin, checkout) {
+            const startDate = new Date(checkin);
+            const endDate = new Date(checkout);
+            const diffTime = endDate - startDate;
+            return Math.ceil(diffTime / (1000 * 60 * 60 * 24));
+        }
+
+        function confirmOrder() {
+            alert("Pesanan Anda berhasil dikonfirmasi! Kami akan menghubungi Anda segera.");
+        }
+
+        function editOrder() {
+            window.location.href = "pesan.html";
+        }
+
+        loadBookingData();
+    </script>
+</body>
+
+</html>
